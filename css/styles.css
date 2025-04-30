@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Russo+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
@@ -134,4 +135,61 @@ h1 {
     h1 {
         font-size: 28px;
     }
+}
+
+
+body {
+    background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* sutil textura urbana */
+    background-color: #0f0f0f;
+    color: #f2f2f2;
+}
+
+h1, h2 {
+    font-family: 'Russo One', sans-serif;
+    color: #f2f2f2;
+}
+
+.section {
+    animation: fadeInUp 1s ease-out both;
+}
+
+.gallery img {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.gallery img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tabla de servicios */
+.services-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 20px;
+    font-family: 'Anton', sans-serif;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.services-table th, .services-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.services-table th {
+    background-color: #d72638;
+    color: white;
+    text-transform: uppercase;
+}
+
+.services-table td {
+    color: #eee;
 }
