@@ -193,3 +193,19 @@ h1, h2 {
 .services-table td {
     color: #eee;
 }
+
+
+nav a {
+    padding: 10px 15px;
+    border: 2px solid #d72638;
+    border-radius: 8px;
+    margin: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+nav a:hover {
+    background-color: #d72638;
+    color: #ffffff;
+}
