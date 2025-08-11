@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Barbería Menor</title>
     <link rel="stylesheet" href="css/styles.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
 </head>
 <body>
 
@@ -79,10 +81,7 @@
             <label>Nombre
                 <input type="text" id="nombre" required placeholder="Tu nombre" />
             </label>
-            <label>Teléfono (WhatsApp)
-                <input type="tel" id="telefono" required placeholder="+54 9 ..." />
-            </label>
-        </div>
+            </div>
 
         <div class="grid-3">
             <label>Servicio
@@ -100,7 +99,7 @@
                 </select>
             </label>
             <label>Fecha
-                <input type="date" id="fecha" required />
+                <input type="text" id="fecha" required placeholder="Elegí una fecha" />
             </label>
         </div>
 
@@ -189,8 +188,7 @@ function actualizarHoras(){
 function enviarReserva(e){
     e.preventDefault();
     const nombre = document.getElementById('nombre').value.trim();
-    const tel = document.getElementById('telefono').value.trim();
-    const servicio = document.getElementById('servicio').value;
+        const servicio = document.getElementById('servicio').value;
     const barbero = document.getElementById('barbero').value;
     const fecha = document.getElementById('fecha').value;
     const hora = document.getElementById('hora').value;
@@ -235,15 +233,22 @@ Zona horaria: ${ZONA_HORARIA}`
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    // Flatpickr en español, sin domingos
+    const fp = flatpickr('#fecha', {
+        dateFormat: 'Y-m-d',
+        minDate: 'today',
+        locale: 'es',
+        disable: [date => date.getDay() === 0], // domingo cerrado
+        onChange: actualizarHoras
+    });
+
     const fecha = document.getElementById('fecha');
     const hoy = new Date();
-    // Setear mínimo hoy
-    fecha.min = hoy.toISOString().split('T')[0];
+    // (minDate ya lo maneja flatpickr)
     fecha.addEventListener('change', actualizarHoras);
     document.getElementById('servicio').addEventListener('change', actualizarHoras);
     actualizarHoras();
-});
-</script>
+});</script>
 
 
 
@@ -261,5 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
     <img src="images/instagram.png" alt="Instagram" />
 </a>
 
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 </body>
 </html>
