@@ -21,6 +21,8 @@
     <nav>
         <a href="#inicio">Inicio</a>
         
+        
+        <a href="#turnos">Turnos</a>
         <a href="#fotos">Fotos</a>
         <a href="#contacto">Ubicación</a>
     </nav>
@@ -68,6 +70,182 @@
 		<img src="images/corte10.jpg" alt="Corte 10" />
     </div>
 </section>
+<section id="turnos" class="section">
+    <h2>Reservá tu turno</h2>
+    <p class="muted">Atendemos de Lunes a Sábado de 11:00 a 21:00 (Domingo cerrado). Seleccioná fecha y hora. Entre semana hay <strong>2 barberos</strong>; los sábados <strong>3 barberos</strong>.</p>
+
+    <form id="booking-form" class="booking-form" onsubmit="return enviarReserva(event)">
+        <div class="grid-2">
+            <label>Nombre
+                <input type="text" id="nombre" required placeholder="Tu nombre" />
+            </label>
+            <label>Teléfono (WhatsApp)
+                <input type="tel" id="telefono" required placeholder="+54 9 ..." />
+            </label>
+        </div>
+
+        <div class="grid-3">
+            <label>Servicio
+                <select id="servicio" required>
+                    <option value="Corte">Corte (30 min)</option>
+                    <option value="Barba">Barba (30 min)</option>
+                    <option value="Corte + Barba">Corte + Barba (60 min)</option>
+                </select>
+            </label>
+            <label>Barbero
+                <select id="barbero">
+                    <option value="Cualquiera">Cualquiera</option>
+                    <option value="Jonathan">Jonathan</option>
+                    <option value="El Menor">El Menor</option>
+                </select>
+            </label>
+            <label>Fecha
+                <input type="date" id="fecha" required />
+            </label>
+        </div>
+
+        <div class="grid-2">
+            <label>Hora
+                <select id="hora" required></select>
+            </label>
+            <label>Notas (opcional)
+                <input type="text" id="notas" placeholder="Ej: degradado bajo, con navaja" />
+            </label>
+        </div>
+
+        <div class="hint" id="capacidad-hint">Capacidad: <span>2 barberos</span></div>
+
+        <button type="submit" class="btn-primary">Confirmar reserva</button>
+        <p class="small muted">Al confirmar, se abrirá WhatsApp con los datos del turno para enviarlos. Si preferís, podés escribirnos por Instagram: <a href="https://instagram.com/darky_menor" target="_blank">@darky_menor</a>.</p>
+    </form>
+</section>
+
+<script>
+// Configuración
+const ZONA_HORARIA = 'America/Argentina/Buenos_Aires';
+const HORA_APERTURA = 11; // 11:00
+const HORA_CIERRE = 21;   // 21:00
+const DURACION_MIN = 30;  // minutos por defecto
+const WHATSAPP_NUMERO = '5491123191879'; // <-- PONER AQUÍ EL NÚMERO, ej: '54911xxxxxxx'
+
+// Utilidades mínimas
+function formatoDos(n){ return n.toString().padStart(2, '0'); }
+function esSabado(fecha){ return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()).getDay() === 6; }
+function esDomingo(fecha){ return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()).getDay() === 0; }
+
+function generarSlots(fecha, servicio){
+    const dur = (servicio === 'Corte + Barba') ? 60 : DURACION_MIN;
+    const slots = [];
+    const inicio = new Date(fecha);
+    inicio.setHours(HORA_APERTURA, 0, 0, 0);
+    const fin = new Date(fecha);
+    fin.setHours(HORA_CIERRE, 0, 0, 0);
+    for(let t = new Date(inicio); t < fin; t = new Date(t.getTime() + dur*60000)){
+        const hh = formatoDos(t.getHours());
+        const mm = formatoDos(t.getMinutes());
+        slots.push(`${hh}:${mm}`);
+    }
+    return slots;
+}
+
+function actualizarCapacidad(fecha){
+    const hint = document.getElementById('capacidad-hint').querySelector('span');
+    hint.textContent = esSabado(fecha) ? '3 barberos' : '2 barberos';
+    // Ocultar opción "Barbero 3" salvo sábados
+    const b3 = document.querySelector('#barbero option[value="Barbero 3"]');
+    if(b3){
+        b3.disabled = !esSabado(fecha);
+    }
+}
+
+function actualizarHoras(){
+    const fechaInput = document.getElementById('fecha');
+    const servicio = document.getElementById('servicio').value;
+    const horaSel = document.getElementById('hora');
+    horaSel.innerHTML = '';
+
+    const f = new Date(fechaInput.value + 'T12:00:00'); // evita TZ shift
+    if(!fechaInput.value){ return; }
+    if(esDomingo(f)){
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.text = 'Domingo cerrado';
+        horaSel.appendChild(opt);
+        horaSel.disabled = true;
+        actualizarCapacidad(f);
+        return;
+    }
+    horaSel.disabled = false;
+    const slots = generarSlots(f, servicio);
+    slots.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s;
+        opt.text = s;
+        horaSel.appendChild(opt);
+    });
+    actualizarCapacidad(f);
+}
+
+function enviarReserva(e){
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value.trim();
+    const tel = document.getElementById('telefono').value.trim();
+    const servicio = document.getElementById('servicio').value;
+    const barbero = document.getElementById('barbero').value;
+    const fecha = document.getElementById('fecha').value;
+    const hora = document.getElementById('hora').value;
+    const notas = document.getElementById('notas').value.trim();
+
+    if(!fecha || !hora){
+        alert('Elegí fecha y hora.');
+        return false;
+    }
+
+    const texto = encodeURIComponent(
+        `Hola! Quiero reservar un turno:
+` +
+        `• Nombre: ${nombre}
+` +
+        `• Tel: ${tel}
+` +
+        `• Servicio: ${servicio}
+` +
+        `• Barbero: ${barbero}
+` +
+        `• Fecha: ${fecha}
+` +
+        `• Hora: ${hora}
+` +
+        (notas ? `• Notas: ${notas}
+` : '') +
+        `
+Zona horaria: ${ZONA_HORARIA}`
+    );
+
+    if(WHATSAPP_NUMERO){
+        const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${texto}`;
+        window.open(url, '_blank');
+    }else{
+        // Fallback a mailto si no hay número configurado
+        const mailto = `mailto:reservas@example.com?subject=Reserva%20de%20turno&body=${texto}`;
+        window.location.href = mailto;
+    }
+    return false;
+}
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+    const fecha = document.getElementById('fecha');
+    const hoy = new Date();
+    // Setear mínimo hoy
+    fecha.min = hoy.toISOString().split('T')[0];
+    fecha.addEventListener('change', actualizarHoras);
+    document.getElementById('servicio').addEventListener('change', actualizarHoras);
+    actualizarHoras();
+});
+</script>
+
+
 
 <section id="contacto" class="section dark">
     <h2>Contacto</h2>
