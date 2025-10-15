@@ -1,0 +1,569 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: #000000;
+    background-image: 
+        radial-gradient(circle at 25% 25%, #1a1a1a 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, #2a2a2a 0%, transparent 50%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #ffffff;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+    border: 2px solid #FFD700;
+    border-radius: 15px;
+    box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.3),
+        inset 0 1px 0 rgba(255, 215, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    border-bottom: 3px solid #FFD700;
+    color: #FFD700;
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+}
+
+.logo-container {
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    height: 120px;
+    width: auto;
+    max-width: 200px;
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5));
+    transform: scale(1.05);
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 3px;
+    position: relative;
+    z-index: 1;
+    margin-top: 10px;
+}
+
+header p {
+    font-size: 1.3em;
+    opacity: 0.9;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+}
+
+main {
+    padding: 40px;
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+}
+
+.reserva-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #FFD700;
+    font-size: 1.1em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+input, select {
+    padding: 12px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    font-size: 1em;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 
+        0 0 0 3px rgba(255, 215, 0, 0.2),
+        0 0 10px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(145deg, #333, #222);
+}
+
+input::placeholder {
+    color: #888;
+}
+
+select option {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+.btn-reservar, .btn-nuevo {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+    color: #000000;
+    border: 2px solid #FFD700;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-reservar::before, .btn-nuevo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-reservar:hover, .btn-nuevo:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 25px rgba(255, 215, 0, 0.4),
+        0 0 20px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, #FFA500 0%, #FFD700 50%, #FFA500 100%);
+}
+
+.btn-reservar:hover::before, .btn-nuevo:hover::before {
+    left: 100%;
+}
+
+.confirmacion {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+    border-radius: 10px;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.confirmacion h2 {
+    color: #FFD700;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+#detalles-turno {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border: 1px solid #FFD700;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+#detalles-turno p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #ffffff;
+}
+
+#detalles-turno strong {
+    color: #FFD700;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+    }
+    
+    main {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+}
+/* Estilos para confirmación */
+.whatsapp-info {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 15px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.whatsapp-info p {
+    color: #FFD700;
+    margin: 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.acciones-confirmacion {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-panel {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+    color: #000000;
+    border: 2px solid #FFD700;
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-panel:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 25px rgba(255, 215, 0, 0.4),
+        0 0 20px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, #FFA500 0%, #FFD700 50%, #FFA500 100%);
+}
+
+.btn-panel:hover::before {
+    left: 100%;
+}
+
+/* Estilos del Panel del Barbero */
+.panel-barbero {
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.panel-barbero h2 {
+    text-align: center;
+    color: #FFD700;
+    margin-bottom: 30px;
+    font-size: 2em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+}
+
+.filtros-panel {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filtros-panel select,
+.filtros-panel input {
+    padding: 10px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-size: 1em;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.filtros-panel select:focus,
+.filtros-panel input:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.btn-filtrar {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+    color: #000000;
+    border: 2px solid #FFD700;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-filtrar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    background: linear-gradient(135deg, #FFA500 0%, #FFD700 50%, #FFA500 100%);
+}
+
+.btn-cerrar {
+    background: linear-gradient(135deg, #666 0%, #444 50%, #666 100%);
+    color: #FFD700;
+    border: 2px solid #666;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-cerrar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 102, 102, 0.4);
+    background: linear-gradient(135deg, #777 0%, #555 50%, #777 100%);
+}
+
+/* Estilos de las tarjetas de turnos */
+.turno-card {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border: 1px solid #FFD700;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.turno-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+    border-color: #FFA500;
+}
+
+.turno-info {
+    flex: 1;
+}
+
+.turno-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #FFD700;
+}
+
+.turno-id {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #000000;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-shadow: none;
+}
+
+.turno-fecha {
+    font-weight: bold;
+    color: #FFD700;
+    font-size: 1.1em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.turno-detalles p {
+    margin: 8px 0;
+    color: #ffffff;
+}
+
+.turno-detalles strong {
+    color: #FFD700;
+}
+
+.turno-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.btn-editar {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: 1px solid #4CAF50;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+
+.btn-editar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+    background: linear-gradient(135deg, #45a049, #4CAF50);
+}
+
+.btn-cancelar {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+    border: 1px solid #f44336;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+
+.btn-cancelar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+    background: linear-gradient(135deg, #d32f2f, #f44336);
+}
+
+.no-turnos {
+    text-align: center;
+    padding: 40px;
+    color: #FFD700;
+    font-size: 1.2em;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border-radius: 10px;
+    border: 2px dashed #FFD700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive para el panel */
+@media (max-width: 768px) {
+    .turno-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .turno-acciones {
+        flex-direction: row;
+        justify-content: center;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    
+    .filtros-panel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .acciones-confirmacion {
+        flex-direction: column;
+    }
+}/
+* Estilos para el botón de acceso directo al panel */
+.acceso-panel {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+.btn-acceso-panel {
+    background: linear-gradient(135deg, #666 0%, #444 50%, #666 100%);
+    color: #FFD700;
+    border: 2px solid #666;
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-acceso-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-acceso-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, #777 0%, #555 50%, #777 100%);
+    border-color: #FFD700;
+}
+
+.btn-acceso-panel:hover::before {
+    left: 100%;
+}
+
+/* Mejorar la visualización de horarios ocupados/disponibles */
+#hora option[disabled] {
+    background-color: #2a2a2a !important;
+    color: #ff6b6b !important;
+}
+
+#hora option:not([disabled]) {
+    background-color: #1a1a1a !important;
+    color: #4CAF50 !important;
+}

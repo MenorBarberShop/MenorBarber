@@ -1,106 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta name="description" content="Barbería Menor — Cortes urbanos, freestyle, barba y estilo de vida en Buenos Aires.">
-    <meta name="keywords" content="barbería, corte, barba, Buenos Aires, barber shop, menor barber, barbero urbano">
-    <meta name="author" content="Barbería Menor">
-    <meta name="google-site-verification" content="googlec2b47f13d6347f5b" />
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Barbería Menor</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería - Reservar Turno</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="logo-menor-barbershop.png" alt="Menor Barbershop" class="logo">
+            </div>
+            <h1>MENOR BARBERSHOP</h1>
+            <p>Reserva tu turno online</p>
+        </header>
 
-<header id="inicio">
-    <img src="images/logo.jpg" alt="Logo Barbería Menor" class="logo" />
-    <h1>El Menor Barber Shop</h1>
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#fotos">Fotos</a>
-        <a href="#contacto">Ubicación</a>
-        <!-- 🔴 NUEVO BOTÓN RESERVAR -->
-        <a href="#reservar" class="btn-menu-reservar">Reservar Turno 🆕</a>
-    </nav>
-</header>
+        <main>
+            <form id="reservaForm" class="reserva-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
 
-<section id="servicios" class="section dark">
-    <h2>Servicios</h2>
-    <table class="services-table">
-        <thead>
-            <tr><th>Servicio</th><th>Precio</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>Corte</td><td>$12.000</td></tr>
-            <tr><td>Corte y Barba</td><td>$15.000</td></tr>
-        </tbody>
-    </table>
-</section>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
 
-<section id="horarios" class="section dark">
-    <h2>Horarios</h2>
-    <table class="services-table">
-        <thead>
-            <tr><th>Día</th><th>Horario</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>Lunes a Sábado</td><td>10:00 AM - 21:00 PM</td></tr>
-            <tr><td>Domingo</td><td>Cerrado</td></tr>
-        </tbody>
-    </table>
-</section>
+                <div class="form-group">
+                    <label for="barbero">Barbero preferido:</label>
+                    <select id="barbero" name="barbero" required>
+                        <option value="">Selecciona un barbero</option>
+                        <option value="el_menor">El Menor</option>
+                        <option value="jhonathan">Jhonathan</option>
+                    </select>
+                </div>
 
-<!-- 🔴 NUEVA SECCIÓN RESERVAR TURNO -->
-<section id="reservar" class="section reservar-section">
-    <h2>📅 Reservá tu turno</h2>
-    <p>Elegí tu barbero, servicio, fecha y hora disponible. Confirmá y listo 💈</p>
-    <a href="turnos%20app/index.html" target="_blank" class="btn-reservar-turno-grande">
-        Reservar Turno (Nuevo)
-    </a>
-</section>
+                <div class="form-group">
+                    <label for="servicio">Servicio:</label>
+                    <select id="servicio" name="servicio" required>
+                        <option value="">Selecciona un servicio</option>
+                        <option value="corte">Corte de pelo - $12.000 (35 min)</option>
+                        <option value="corte_barba">Corte + Barba - $15.000 (35 min)</option>
+                    </select>
+                </div>
 
-<section id="fotos" class="section">
-    <h2>Galería</h2>
-    <div class="gallery">
-        <img src="images/corte1.jpg" alt="Corte 1" />
-        <img src="images/corte2.jpg" alt="Corte 2" />
-        <img src="images/corte3.jpg" alt="Corte 3" />
-        <img src="images/corte4.jpg" alt="Corte 4" />
-        <img src="images/corte5.jpg" alt="Corte 5" />
-        <img src="images/corte6.jpg" alt="Corte 6" />
-        <img src="images/corte7.jpg" alt="Corte 7" />
-        <img src="images/corte8.jpg" alt="Corte 8" />
-        <img src="images/corte9.jpg" alt="Corte 9" />
-        <img src="images/corte10.jpg" alt="Corte 10" />
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="hora">Hora:</label>
+                    <select id="hora" name="hora" required>
+                        <option value="">Selecciona una hora</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-reservar">Reservar Turno</button>
+            </form>
+
+            <!-- Botón de acceso directo al panel del barbero -->
+            <div class="acceso-panel">
+                <button onclick="abrirPanelBarbero()" class="btn-acceso-panel">
+                    💈 Acceso Panel Barbero
+                </button>
+            </div>
+
+            <div id="confirmacion" class="confirmacion" style="display: none;">
+                <h2>¡Turno Reservado!</h2>
+                <div id="detalles-turno"></div>
+                <div class="acciones-confirmacion">
+                    <button onclick="nuevaReserva()" class="btn-nuevo">Nueva Reserva</button>
+                    <button onclick="abrirPanelBarbero()" class="btn-panel">Panel Barbero</button>
+                </div>
+            </div>
+
+            <!-- Panel del Barbero -->
+            <div id="panel-barbero" class="panel-barbero" style="display: none;">
+                <h2>💈 Panel del Barbero</h2>
+                <div class="filtros-panel">
+                    <select id="filtro-barbero">
+                        <option value="">Todos los barberos</option>
+                        <option value="el_menor">El Menor</option>
+                        <option value="jhonathan">Jhonathan</option>
+                    </select>
+                    <input type="date" id="filtro-fecha" />
+                    <button onclick="filtrarTurnos()" class="btn-filtrar">Filtrar</button>
+                </div>
+                <div id="lista-turnos"></div>
+                <button onclick="cerrarPanelBarbero()" class="btn-cerrar">Volver</button>
+            </div>
+        </main>
     </div>
-</section>
 
-<section id="contacto" class="section dark">
-    <h2>Contacto</h2>
-    <p>Instagram: <a href="https://instagram.com/darky_menor" target="_blank">@darky_menor</a></p>
-    <iframe src="https://www.google.com/maps?q=Avenida+Rivadavia+8591,+Buenos+Aires&output=embed" width="100%" height="300" style="border:0;" allowfullscreen=""></iframe>
-</section>
-
-<footer>
-    <p>Barbería Menor — Estilo de barrio, nivel mundial.</p>
-</footer>
-
-<a href="https://instagram.com/darky_menor" target="_blank" class="ig-float">
-    <img src="images/instagram.png" alt="Instagram" />
-</a>
-
-<!-- 🌀 SCRIPT PARA DESPLAZAMIENTO SUAVE -->
-<script>
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function(e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth"
-    });
-  });
-});
-</script>
-
+    <script src="script.js"></script>
 </body>
+
 </html>
