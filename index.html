@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
     <meta name="description" content="Barbería Menor — Cortes urbanos, freestyle, barba y estilo de vida en Buenos Aires.">
     <meta name="keywords" content="barbería, corte, barba, Buenos Aires, barber shop, menor barber, barbero urbano">
     <meta name="author" content="Barbería Menor">
@@ -20,11 +18,13 @@
     <h1>El Menor Barber Shop</h1>
     <nav>
         <a href="#inicio">Inicio</a>
-        
         <a href="#fotos">Fotos</a>
         <a href="#contacto">Ubicación</a>
+        <!-- 🔴 NUEVO BOTÓN RESERVAR -->
+        <a href="#reservar" class="btn-menu-reservar">Reservar Turno 🆕</a>
     </nav>
 </header>
+
 <section id="servicios" class="section dark">
     <h2>Servicios</h2>
     <table class="services-table">
@@ -38,7 +38,6 @@
     </table>
 </section>
 
-
 <section id="horarios" class="section dark">
     <h2>Horarios</h2>
     <table class="services-table">
@@ -46,12 +45,20 @@
             <tr><th>Día</th><th>Horario</th></tr>
         </thead>
         <tbody>
-            <tr><td>Lunes a Sábado</td><td>11:00 AM - 21:00 PM</td></tr>
+            <tr><td>Lunes a Sábado</td><td>10:00 AM - 21:00 PM</td></tr>
             <tr><td>Domingo</td><td>Cerrado</td></tr>
         </tbody>
     </table>
 </section>
 
+<!-- 🔴 NUEVA SECCIÓN RESERVAR TURNO -->
+<section id="reservar" class="section reservar-section">
+    <h2>📅 Reservá tu turno</h2>
+    <p>Elegí tu barbero, servicio, fecha y hora disponible. Confirmá y listo 💈</p>
+    <a href="turnos/index.html" target="_blank" class="btn-reservar-turno-grande">
+        Reservar Turno (Nuevo)
+    </a>
+</section>
 
 <section id="fotos" class="section">
     <h2>Galería</h2>
@@ -62,10 +69,10 @@
         <img src="images/corte4.jpg" alt="Corte 4" />
         <img src="images/corte5.jpg" alt="Corte 5" />
         <img src="images/corte6.jpg" alt="Corte 6" />
-		<img src="images/corte7.jpg" alt="Corte 7" />
-		<img src="images/corte8.jpg" alt="Corte 8" />
-		<img src="images/corte9.jpg" alt="Corte 9" />
-		<img src="images/corte10.jpg" alt="Corte 10" />
+        <img src="images/corte7.jpg" alt="Corte 7" />
+        <img src="images/corte8.jpg" alt="Corte 8" />
+        <img src="images/corte9.jpg" alt="Corte 9" />
+        <img src="images/corte10.jpg" alt="Corte 10" />
     </div>
 </section>
 
@@ -82,6 +89,18 @@
 <a href="https://instagram.com/darky_menor" target="_blank" class="ig-float">
     <img src="images/instagram.png" alt="Instagram" />
 </a>
+
+<!-- 🌀 SCRIPT PARA DESPLAZAMIENTO SUAVE -->
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+</script>
 
 </body>
 </html>
