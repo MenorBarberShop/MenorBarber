@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería - Reservar Turno</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="logo-menor-barbershop.png" alt="Menor Barbershop" class="logo">
+            </div>
+            <h1>MENOR BARBERSHOP</h1>
+            <p>Reserva tu turno online</p>
+        </header>
+
+        <main>
+            <form id="reservaForm" class="reserva-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="barbero">Barbero preferido:</label>
+                    <select id="barbero" name="barbero" required>
+                        <option value="">Selecciona un barbero</option>
+                        <option value="el_menor">El Menor</option>
+                        <option value="jhonathan">Jhonathan</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="servicio">Servicio:</label>
+                    <select id="servicio" name="servicio" required>
+                        <option value="">Selecciona un servicio</option>
+                        <option value="corte">Corte de pelo - $12.000 (35 min)</option>
+                        <option value="corte_barba">Corte + Barba - $15.000 (35 min)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="hora">Hora:</label>
+                    <select id="hora" name="hora" required>
+                        <option value="">Selecciona una hora</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-reservar">Reservar Turno</button>
+            </form>
+
+            <div id="confirmacion" class="confirmacion" style="display: none;">
+                <h2>¡Turno Reservado!</h2>
+                <div id="detalles-turno"></div>
+                <div class="acciones-confirmacion">
+                    <button onclick="nuevaReserva()" class="btn-nuevo">Nueva Reserva</button>
+                    <button onclick="abrirPanelBarbero()" class="btn-panel">Panel Barbero</button>
+                </div>
+            </div>
+
+            <!-- Panel del Barbero -->
+            <div id="panel-barbero" class="panel-barbero" style="display: none;">
+                <h2>💈 Panel del Barbero</h2>
+                <div class="filtros-panel">
+                    <select id="filtro-barbero">
+                        <option value="">Todos los barberos</option>
+                        <option value="el_menor">El Menor</option>
+                        <option value="jhonathan">Jhonathan</option>
+                    </select>
+                    <input type="date" id="filtro-fecha" />
+                    <button onclick="filtrarTurnos()" class="btn-filtrar">Filtrar</button>
+                </div>
+                <div id="lista-turnos"></div>
+                <button onclick="cerrarPanelBarbero()" class="btn-cerrar">Volver</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
